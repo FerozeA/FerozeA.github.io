@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rawls vs Nozick</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app" aria-label="Rawls vs Nozick debate simulator">
+      <header class="header">
+        <h1 class="title">Rawls vs Nozick</h1>
+        <p class="subtitle" id="subtitle">Feed them an argument</p>
+      </header>
+
+      <section class="promptPanel" id="promptPanel" aria-label="Prompt selection">
+        <div class="promptGrid" id="promptGrid" role="list"></div>
+        <div class="hint" id="hint">
+          Refresh the page for a new set of 5 prompts.
+        </div>
+      </section>
+
+      <section class="arena hidden" id="arena" aria-label="Debate arena">
+        <div class="arenaTop">
+          <div class="selectedPrompt" id="selectedPrompt" aria-live="polite"></div>
+          <button class="restartBtn" id="restartBtn" type="button" title="Reload for new prompts">
+            Reload
+          </button>
+        </div>
+
+        <div class="chat" id="chat" role="log" aria-live="polite" aria-relevant="additions"></div>
+      </section>
+    </main>
+
+    <template id="bubbleTemplate">
+      <article class="bubble" data-side="">
+        <div class="meta">
+          <span class="name"></span>
+          <span class="role"></span>
+        </div>
+        <div class="text"></div>
+      </article>
+    </template>
+
+    <template id="typingTemplate">
+      <article class="bubble typing" data-side="">
+        <div class="meta">
+          <span class="name"></span>
+          <span class="role"></span>
+        </div>
+        <div class="text">
+          <span class="dots" aria-label="Typing">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          </span>
+        </div>
+      </article>
+    </template>
+
+    <script src="./conversations-data.js"></script>
+    <script src="./script.js" defer></script>
+  </body>
+</html>

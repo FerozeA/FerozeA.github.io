@@ -1,0 +1,257 @@
+:root {
+  --bg: #0b3d2e; /* pine green */
+  --bubble: #ffffff;
+  --text: #111111;
+  --muted: rgba(255, 255, 255, 0.78);
+  --muted2: rgba(0, 0, 0, 0.58);
+  --shadow: 0 14px 40px rgba(0, 0, 0, 0.22);
+  --radius: 18px;
+  --radius2: 14px;
+  --maxw: 980px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(
+      1000px 600px at 40% 10%,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0) 60%
+    ),
+    var(--bg);
+  color: white;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.app {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 28px 18px 40px;
+}
+
+.header {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(34px, 5vw, 54px);
+  letter-spacing: -0.02em;
+  font-weight: 800;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 18px;
+  color: var(--muted);
+}
+
+.promptPanel {
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(6px);
+  box-shadow: var(--shadow);
+}
+
+.promptGrid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 720px) {
+  .promptGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.promptBtn {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  padding: 14px 14px;
+  border-radius: 16px;
+  background: var(--bubble);
+  color: var(--text);
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.25;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.16);
+  transform: translateY(0);
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+
+.promptBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+}
+
+.hint {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.arena {
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(6px);
+  box-shadow: var(--shadow);
+  min-height: 58vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 14px;
+}
+
+.arenaTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.selectedPrompt {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.restartBtn {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  font-family: Helvetica, Arial, sans-serif;
+  transition: background 140ms ease, transform 140ms ease;
+}
+
+.restartBtn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-1px);
+}
+
+.chat {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  overflow: auto;
+  padding: 4px 2px 10px;
+  scroll-behavior: smooth;
+}
+
+.bubble {
+  width: min(78%, 640px);
+  background: var(--bubble);
+  color: var(--text);
+  border-radius: var(--radius);
+  padding: 12px 12px 11px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  transform: translateY(10px);
+  animation: popIn 260ms ease forwards;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.bubble[data-side="left"] {
+  justify-self: start;
+  border-bottom-left-radius: 6px;
+}
+
+.bubble[data-side="right"] {
+  justify-self: end;
+  border-bottom-right-radius: 6px;
+}
+
+.meta {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+
+.name {
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.role {
+  font-size: 12px;
+  color: var(--muted2);
+  font-weight: 700;
+}
+
+.text {
+  font-size: 15px;
+  line-height: 1.35;
+  white-space: pre-wrap;
+}
+
+.typing .text {
+  display: flex;
+  align-items: center;
+  min-height: 20px;
+}
+
+.dots {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: rgba(0, 0, 0, 0.28);
+  border-radius: 999px;
+  animation: bounce 900ms ease-in-out infinite;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 120ms;
+}
+.dot:nth-child(3) {
+  animation-delay: 240ms;
+}
+
+@keyframes popIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
